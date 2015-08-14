@@ -1,0 +1,20 @@
+{
+  "name": "phaser-seed",
+  "version": "0.0.0",
+  "homepage": "https://github.com/jdbence/phaser-seed",
+  "authors": [
+    "jdbence <jdbence@yahoo.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "phaser": "~2.4.2"
+  }
+}
