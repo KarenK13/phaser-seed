@@ -1,5 +1,13 @@
 # phaser-seed
 
-npm install
+Get up and running with Phaser
 
-bower install
+### npm / bower
+
+Install via [npm](https://www.npmjs.com)
+
+`npm install`
+
+Install via [bower](http://bower.io)
+
+`bower install`
