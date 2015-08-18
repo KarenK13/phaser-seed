@@ -1,14 +1,24 @@
 <!DOCtype html>
 
 <head>
-    
-</head>
-
-
-<body>
-    Hello world!
     <script type="text/javascript" src="../bower_components/phaser/build/phaser.js"></script>
-    <script type="text/javascript" src="breakout.js"></script>
-</body>
+    
+    <script type="text/javascript" src="boot.js"></script>
+    <script type="text/javascript" src="preload.js"></script>
+    <script type="text/javascript" src="gameplay.js"></script>
+    <script type="text/javascript" src="gameover.js"></script>
+    
+    <script type="text/javascript">
+    
+        (function () {
+            var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-example');
+            game.state.add("Boot", boot);
+            game.state.add("Preload", preload);
+            game.state.add("Gameplay", gameplay);
+            game.state.add("Gameover", gameover);
+            game.state.start("Boot");
+        })();
+    </script>
+</head>
 
 </html>
