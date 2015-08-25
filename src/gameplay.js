@@ -10,10 +10,22 @@ gameplay.prototype = {
     scoreText: null,
     livesText: null,
     introText: null,
+    endText: null,
     s: null,
+    highScores: [
+            ["Clementine B. Heidenreich", 100],
+            ["Bridget E. Craft", 200],
+            ["Melvin N. Fernandez", 300],
+            ["Steven E. Peter", 400],
+            ["Leona P. Williams", 500],
+            ["Clementine B. Heidenreich", 600],
+            ["Bridget E. Craft", 700],
+            ["Melvin N. Fernandez", 800],
+            ["Steven E. Peter", 900],
+            ["Leona P. Williams", 1000]
+            ],
     create: function(game){
         gameplay.prototype.game = game;
-        
         
         gameplay.prototype.ballOnPaddle = true;
         gameplay.prototype.lives = 3;
@@ -69,7 +81,10 @@ gameplay.prototype = {
         gameplay.prototype.introText.anchor.setTo(0.5, 0.5);
     
         game.input.onDown.add(gameplay.prototype.releaseBall, this);
-    
+        
+        if(mediator) {
+            mediator.subscribe("REPLAY_GAME", this.onReplayGame);
+        }
     },
     
     update: function (game) {
@@ -100,6 +115,13 @@ gameplay.prototype = {
     
     },
     
+    onReplayGame: function () {
+        if(mediator) {
+            mediator.remove("REPLAY_GAME", this.onReplayGame);
+        }
+        gameplay.prototype.game.state.start("gameover");
+    },
+    
     releaseBall: function () {
     
         if (gameplay.prototype.ballOnPaddle)
@@ -118,34 +140,74 @@ gameplay.prototype = {
         gameplay.prototype.lives--;
         gameplay.prototype.livesText.text = 'lives: ' + gameplay.prototype.lives;
     
-        if (gameplay.prototype.lives === 0)
-        {
-            gameplay.prototype.gameOver();
-        }
-        else
-        {
+        if (gameplay.prototype.lives === 0) {
+            gameplay.prototype.gameOver(gameplay.prototype.game);
+        } else {
             gameplay.prototype.ballOnPaddle = true;
     
             gameplay.prototype.ball.reset(gameplay.prototype.paddle.body.x + 16, gameplay.prototype.paddle.y - 16);
             
             gameplay.prototype.ball.animations.stop();
         }
-    
     },
     
-    gameOver: function () {
+    gameOver: function (game) {
+        //gameplay.prototype.game = game;
     
         gameplay.prototype.ball.body.velocity.setTo(0, 0);
         
         gameplay.prototype.introText.text = 'Game Over!';
         gameplay.prototype.introText.visible = true;
         
-        gameplay.prototype.game.input.onDown.add(gameplay.prototype.gameOverClicked, this);
+        setTimeout(function() {
+            if(gameplay.prototype.isHighScore(gameplay.prototype.score)) {
+                gameplay.prototype.showNameInput();
+                gameplay.prototype.addHighScore(gameplay.prototype.name, gameplay.prototype.score);
+                
+                mediator.publish("SHOW_HIGH_SCORES", gameplay.prototype.highScores);
+            }
+            // } else {
+            //     gameplay.prototype.endText = game.add.text(game.world.centerX, 400, 'Click to continue', { font: "40px Arial", fill: "#ffffff", align: "center" });
+            //     game.input.onDown.add(gameplay.prototype.gameOverClicked, this);
+            // }
+        }, 2000);
     
     },
     
-    gameOverClicked: function () {
-        gameplay.prototype.game.state.start("Gameover");
+    // gameOverClicked: function () {
+    //     gameplay.prototype.game.state.start("gameover");
+    // },
+    
+    isHighScore: function (score) {
+        return true; // needs to be changed eventually
+    },
+    
+    showNameInput: function() {
+        // Get user's name from input field
+        var person = prompt("Please enter your name", "Harry Potter");
+        person = person != null ? person : "Guest";
+        gameplay.prototype.name = person;
+    },
+    
+    addHighScore: function(name, score) {
+        var highScores = gameplay.prototype.highScores;
+        var maxTotalScores = 10;
+        
+        
+        // Sorts scores from highest to lowest
+        highScores.sort(function(a, b) {
+            return b[1] - a[1];
+        });
+        
+        for(var i = 0; i < highScores.length; i++) {
+            var person = highScores[i];
+            // Once you reach a score that's higher insert the new score beneath it, unless there's a tie - then the old one stays
+            if(person[1] < score || (i == highScores.length && person[1] != score)) {
+                highScores.splice(i, highScores.length >= maxTotalScores ? 1 : 0, [name, score]);
+                break;
+            }
+        }
+        
     },
     
     ballHitBrick: function (_ball, _brick) {
