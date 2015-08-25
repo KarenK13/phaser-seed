@@ -16,7 +16,7 @@
     <script src="invaders.js"></script>
     <script src="gameover.js"></script>
     
-    <script src="box.js"></script>
+    <script src="boxExample.js"></script>
     
     <script>
         this.mediator = 456;
@@ -28,7 +28,7 @@
             var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-example');
             
             // Box template
-            game.state.add("box", box);
+            game.state.add("boxExample", boxExample);
             
             game.state.add("menu", menu);
             game.state.add("preload", preload);
@@ -36,7 +36,7 @@
             game.state.add("breakout", breakout);
             game.state.add("gameover", gameover);
             
-            //game.state.start("box");
+            //game.state.start("boxExample");
             game.state.start("menu");
             
             var onChangeGameState = function() {
