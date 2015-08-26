@@ -1,14 +1,9 @@
 {
   "name": "phaser-seed",
-  "version": "0.0.1",
-  "homepage": "https://github.com/KarenK13/phaser-seed",
+  "version": "0.0.0",
+  "homepage": "https://github.com/jdbence/phaser-seed",
   "authors": [
-    "Karen Kauffman <karenkauffman813@gmail.com>"
-  ],
-  "description": "learning phaser",
-  "main": "index.html",
-  "keywords": [
-    "phaser"
+    "jdbence <jdbence@yahoo.com>"
   ],
   "license": "MIT",
   "private": true,
@@ -19,7 +14,7 @@
     "test",
     "tests"
   ],
-  "devDependencies": {
+  "dependencies": {
     "phaser": "~2.4.2",
     "bootstrap": "~3.3.5",
     "jquery": ">= 1.9.1",
