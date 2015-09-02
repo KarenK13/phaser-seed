@@ -1,0 +1,58 @@
+.column-question{
+    width: 200px;
+    height: 600px;
+    background-color: black;
+    position: absolute;
+    right: 0;
+}
+
+.column-btn{
+    float: left;
+    padding: 10px;
+    height: calc(50% - 10px);
+    width: 50%;
+    margin-bottom: 10px;
+}
+
+.column-btn:nth-child(odd){
+    margin-right: 5px;
+    width: calc(50% - 5px);
+}
+
+.column-btn:nth-child(even){
+    margin-left: 5px;
+    width: calc(50% - 5px);
+}
+
+.tl {
+    background: red;
+}
+
+.tr {
+    background: blue;
+}
+
+.bl {
+    background: green;
+}
+
+.br {
+    background: yellow; 
+} 
+
+.button-holder {
+    height: 200px;
+    width: 200px;
+    /*padding: 10px;*/
+    padding: 0 10px;
+    position: absolute;
+    bottom: 0;
+}
+
+.column-question-text {
+    padding: 15px;
+    color: white;
+    overflow-x: hidden;
+    overflow-y: visible;
+    height: calc(100% - 200px);
+}

@@ -3,7 +3,7 @@
 <head>
     <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap-theme.css">
-    
+    <link rel="stylesheet" href="./css/style.css"/>
     
     <script src="../bower_components/jquery/dist/jquery.js"></script>
     <script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
@@ -36,8 +36,8 @@
             game.state.add("breakout", breakout);
             game.state.add("gameover", gameover);
             
-            //game.state.start("boxExample");
-            game.state.start("menu");
+            game.state.start("boxExample");
+            //game.state.start("menu");
             
             var onChangeGameState = function() {
               var state = arguments[0];
@@ -84,7 +84,22 @@
         </div>
       </div>
     </div>
-
+  
+  <div class="column-question">
+    <div class="column-question-text">
+      
+    </div>
+    
+    <div class="button-holder">
+      <div class="column-btn tl" onClick="topLeftClick()">Click me!</div>
+      <div class="column-btn tr" onClick="topRightClick()">Click me too!</div>
+      <div class="column-btn bl" onClick="bottomLeftClick()">Click me three!</div>
+      <div class="column-btn br" onClick="bottomRightClick()">And me!</div>
+    </div>
+    
+  </div>
+  
+  <div id="phaser-example"></div>
   <script>
       (function () {
           
@@ -138,6 +153,27 @@
           this.mediator.subscribe("SHOW_HIGH_SCORES", showHighScores);
           this.mediator.subscribe("SHOW_MENU", showMenu);
       })();
+ 
+      function topLeftClick() {
+        console.log("You clicked the red box");
+      }
+      
+      function topRightClick() {
+        console.log("You clicked the blue box");
+      }
+      
+      function bottomLeftClick() {
+        console.log("You clicked the green box");
+      }
+      
+      function bottomRightClick() {
+        console.log("You clicked the yellow box");
+        nextQuestion("You clicked the yellow box");
+      }
+      
+      function nextQuestion(question) {
+        $('.column-question-text').html(question);
+      }
   </script>
     
 </body>
