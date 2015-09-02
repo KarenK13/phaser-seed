@@ -125,6 +125,7 @@ boxExample.prototype = {
         return drawnObject;
     },
     
+    
     //create palette items (type, elements)
     createPaletteItems: function(game, type, elements) {
         for(var i=0; i<elements.length; i++){
